@@ -1464,6 +1464,12 @@ bool CPlayerInventory::AddEconItem( CEconItem * pItem, bool bUpdateAckFile, bool
 		return false;
 	}
 
+	// Not sure if this is the best place for this. Items not included in the mod will have an index of 0 by default, filter them here.
+	if (newItem.GetItemDefinition()->GetDefinitionIndex() == 0)
+	{
+		return false;
+	}
+
 	int iIdx = m_aInventoryItems.Insert( newItem );
 
 	DirtyItemHandles();
